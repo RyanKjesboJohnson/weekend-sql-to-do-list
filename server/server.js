@@ -1,5 +1,4 @@
-const express = require('express');
-const app = express();
+const express = require('express'); const app = express();
 
 const todos = require('./routes/todos.router.js');
 

@@ -7,7 +7,7 @@
     "start": "nodemon server/server.js",
     "start:test": "export NODE_ENV=test && node server/server.js",
     "cypress:run": "cypress run --config-file cypress.config.js",
-    "test": "start-server-and-test start:test http://localhost:5001 cypress:run"
+    "test": "start-server-and-test start:test http://localhost:5002 cypress:run"
   },
   "author": "",
   "license": "ISC",
