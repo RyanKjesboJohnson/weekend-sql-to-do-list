@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { response } = require('express');
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
@@ -17,5 +18,26 @@ router.get('/', (req, res) => {
         res.sendStatus(500)
       })});
 
+router.post('/', (req, res) => {
+    console.log("POST /todos got a post request");
+    console.log(req.body);
+    const sqlQueryText = `
+        INSERT INTO "todos"
+            ("text")
+            VALUES
+            ($1)
+        `
+    const sqlValues = [
+        req.body.text
+    ]
 
+    pool.query(sqlQueryText, sqlValues)
+    .then ((dbresult) => {
+        res.sendStatus(201)
+    })
+    .catch((dbError) => {
+        console.log('POST /todos SQL query failed', dbError)
+        res.sendStatus(500)
+    })
+})
 module.exports = router;
