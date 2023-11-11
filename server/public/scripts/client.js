@@ -25,7 +25,19 @@ function createToDo(event) {
  * and removes the item from the db.
  */
 function deleteToDo(event){
+  console.log('this is the deleteToDo function');
+  let clickedButton = event.target;
+  let theTableRow = clickedButton.closest('tr');
+  let toDoId = Number(theTableRow.getAttribute('data-toDoId'));
 
+  axios({
+    method: 'DELETE',
+    url: `/todos/${toDoId}`
+  }). then((response) => {
+    getToDos();
+  }). catch((error) => {
+    console.log("DELETE /todos/:id failed:", error);
+  })
 }
 
 /** This function gets the complete list of songs from db */

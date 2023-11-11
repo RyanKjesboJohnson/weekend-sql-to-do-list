@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req,res) => {
   let idOfToDo = req.params.id;
-  console.log(idOfToDo);
+  // console.log(idOfToDo);
   const sqlText = `
     UPDATE "todos"
       SET "isComplete" = True
@@ -56,6 +56,22 @@ router.put('/:id', (req,res) => {
       .catch((dbError) => {
         console.log('PUT /todos/:id failed', dbError);
         res.sendStatus(500)
+      })
+})
+
+router.delete('/:id', (req,res) => {
+  let idOfToDoToDelete = req.params.id;
+  const sqlText = `
+    DELETE FROM "todos"
+    WHERE "id" = $1;`
+  const sqlValues = [idOfToDoToDelete]
+    pool.query(sqlText,sqlValues)
+      .then ((dbResult) => {
+        res.sendStatus(200)
+      })
+      .catch((dbError) => {
+        console.log('DELETE /todos/:id failed:', dbError);
+        res.sendStatus(500);
       })
 })
 
