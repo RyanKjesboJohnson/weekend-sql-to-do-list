@@ -1,5 +1,3 @@
-// const { response } = require("express");
-
 console.log('JS is sourced!');
 
 /** This function runs when a new to do item is being submitted */
@@ -47,7 +45,21 @@ function getToDos() {
 
 /** This function changes the todo item to be complete */
 function markAsComplete(event){
+  console.log('this is the markAsComplete function');
+  let clickedButton = event.target;
+  let theTableRow = clickedButton.closest('tr');
+  let toDoId = Number(theTableRow.getAttribute('data-toDoId'));
 
+console.log(toDoId);
+
+  axios({
+    method: 'PUT',
+    url: `/todos/${toDoId}`
+  }). then((response) => {
+    getToDos();
+  }).catch((error) => {
+    console.log("PUT /todos/:id fail:", error);
+  })
 }
 
 /** This function loads when the DOM initially loads */
@@ -63,14 +75,27 @@ function renderToDos(todoArray) {
     toDoTable.innerHTML = '';
 
     for (let todo of todoArray){
-        toDoTable.innerHTML += `
-        <tr data-testid="toDoItem" data-toDoId="${todo.id}">
+      let markAsCompleteHTML = '';
+      if (todo.isComplete){markAsCompleteHTML =
+        `
+        <tr class="completed" data-testid="toDoItem" data-toDoId="${todo.id}">
         <td>${todo.text}</td>
         <td><button data-testid="completeButton" onclick="markAsComplete(event)" >Complete</button></td>
         <td><button data-testid="deleteButton" onclick="deleteToDo(event)" >Delete</button></td>
         </tr>
         `
-    }
+      } else {markAsCompleteHTML =
+`
+      <tr data-testid="toDoItem" data-toDoId="${todo.id}">
+      <td>${todo.text}</td>
+      <td><button data-testid="completeButton" onclick="markAsComplete(event)" >Complete</button></td>
+      <td><button data-testid="deleteButton" onclick="deleteToDo(event)" >Delete</button></td>
+      </tr>
+      `
+      }
+      toDoTable.innerHTML += markAsCompleteHTML
+
+  }
 }
 
 //Item's under here load on startup
