@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
     const sqlQueryText = `
-      SELECT "id", "text", "isComplete" FROM "todos"
+      SELECT "id", "text", "isComplete", "completedAt" FROM "todos"
         ORDER BY "id";
     `
   
@@ -44,9 +44,10 @@ router.post('/', (req, res) => {
 router.put('/:id', (req,res) => {
   let idOfToDo = req.params.id;
   // console.log(idOfToDo);
+  console.log(req.body);
   const sqlText = `
     UPDATE "todos"
-      SET "isComplete" = True
+      SET "isComplete" = True, "completedAt" = CURRENT_TIMESTAMP 
       WHERE "id" = $1;`
   const sqlValues = [idOfToDo]
     pool.query(sqlText, sqlValues) 
