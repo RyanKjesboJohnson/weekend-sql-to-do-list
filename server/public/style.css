@@ -1,3 +1,13 @@
+body {
+    background-color: #031c2b;
+    color: #ffff00;
+}
+
 .completed {
     background-color: darkgray;
+}
+
+table, th, td{
+    border-color: #ffff00;
+    border: 1px solid;
 }

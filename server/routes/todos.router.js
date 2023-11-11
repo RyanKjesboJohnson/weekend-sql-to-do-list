@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 router.get('/', (req, res) => {
     const sqlQueryText = `
       SELECT "id", "text", "isComplete", "completedAt" FROM "todos"
-        ORDER BY "id";
+        ORDER BY "isComplete";
     `
   
     // Now how do we mail this SQL query to the db?

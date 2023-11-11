@@ -62,8 +62,6 @@ function markAsComplete(event){
   let theTableRow = clickedButton.closest('tr');
   let toDoId = Number(theTableRow.getAttribute('data-toDoId'));
 
-console.log(toDoId);
-
   axios({
     method: 'PUT',
     url: `/todos/${toDoId}`
@@ -91,20 +89,14 @@ function renderToDos(todoArray) {
       let markAsCompleteHTML = '';
       let timeDate = todo.completedAt;
       let dateCompleted = '';
-      let timeCompleted = '';
       if (timeDate){dateCompleted = timeDate.split("T")[0]}
-      if (timeDate){timeCompleted = timeDate.split("T")[1]}
-      if (timeDate){timeCompleted = timeCompleted.split(".")[0]}
-
-
 
       if (todo.isComplete){markAsCompleteHTML =
         `
         <tr class="completed" data-testid="toDoItem" data-toDoId="${todo.id}">
         <td>${todo.text}</td>
         <td>${dateCompleted}</td>
-        <td>${timeCompleted}</td>
-        <td><button data-testid="completeButton" onclick="markAsComplete(event)" >Complete</button></td>
+        <td data-testid="completeButton">Completed</td>
         <td><button data-testid="deleteButton" onclick="deleteToDo(event)" >Delete</button></td>
         </tr>
         `
@@ -113,7 +105,6 @@ function renderToDos(todoArray) {
       <tr data-testid="toDoItem" data-toDoId="${todo.id}">
       <td>${todo.text}</td>
       <td>${dateCompleted}</td>
-      <td>${timeCompleted}</td>
       <td><button data-testid="completeButton" onclick="markAsComplete(event)" >Complete</button></td>
       <td><button data-testid="deleteButton" onclick="deleteToDo(event)" >Delete</button></td>
       </tr>
