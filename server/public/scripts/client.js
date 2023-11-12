@@ -30,6 +30,15 @@ function deleteToDo(event){
   let theTableRow = clickedButton.closest('tr');
   let toDoId = Number(theTableRow.getAttribute('data-toDoId'));
 
+  swal.fire({
+    title: "Confirm Delete",
+    showCancelButton: true,
+    confirmButtonText: "Delete",
+    text: "Are you sure you want to delete this to do?",
+    icon: "warning",
+  }).then((result) => {
+    if (result.isConfirmed){Swal.fire(
+  
   axios({
     method: 'DELETE',
     url: `/todos/${toDoId}`
@@ -37,7 +46,8 @@ function deleteToDo(event){
     getToDos();
   }). catch((error) => {
     console.log("DELETE /todos/:id failed:", error);
-  })
+  }))}
+})
 }
 
 /** This function gets the complete list of songs from db */

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="./scripts/axios.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./scripts/client.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <title>SQL TO-DO List</title>
@@ -16,13 +17,14 @@
   </header>
   </div>
 
-  <div class="form-group container">
+  <div class="form-group container-fluid">
     
     <form>
-      <label for="entertodoitem">Add a To Do Item:</label>
-      <textarea class="form-control" id="todotext" data-testid="toDoTextInput"></textarea>
-      <button data-testid="submitButton" class="btn btn-primary" onclick="createToDo(event)">Submit</button>
-
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-lg">Add a To Do:</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-described id="todotext" data-testid="toDoTextInput"></textarea>
+        <button data-testid="submitButton" class="btn btn-primary" onclick="createToDo(event)">Submit</button>
+      </div>
     </form>
 
   </div>
