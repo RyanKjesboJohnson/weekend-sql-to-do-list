@@ -11,3 +11,10 @@ INSERT INTO "todos"
   VALUES 
   ('Build a CRUD app'),
   ('Make my app look nice');
+  
+ ALTER TABLE "todos"
+ ADD "completedAt" TIMESTAMP;
+ 
+ UPDATE "todos"
+ SET "completedAt" = CURRENT_TIMESTAMP
+ WHERE "id" = 7;
