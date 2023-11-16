@@ -1,6 +1,6 @@
 const pg = require('pg')
 
-let databaseName = 'weekend-to-do-app'
+let databaseName = 'weekend-to-do-app-yge2'
 let pool;
 
 if (process.env.DATABASE_URL) {
