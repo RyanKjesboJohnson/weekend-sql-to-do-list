@@ -12,7 +12,7 @@ if (process.env.DATABASE_URL) {
   });
 }
 else{
-const pool = new pg.Pool({
+pool = new pg.Pool({
     host: 'localhost',
     port: 5432,
     database: databaseName,
