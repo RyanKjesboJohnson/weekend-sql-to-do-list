@@ -1,6 +1,7 @@
 const pg = require('pg')
 
 let databaseName = 'weekend-to-do-app'
+let pool;
 
 if (process.env.DATABASE_URL) {
   pool = new pg.Pool({
